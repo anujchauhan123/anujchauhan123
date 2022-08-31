@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Odoo Mobile",
+    "slug": "OdooMobile",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "9.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/old_logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.o2btechnologies.o2b",
+      "buildNumber": "2.0.2",
+      "infoPlist": {
+          "NSCameraUsageDescription": "This app requires access to your camera to scan barcode given on your instance",
+      },
+    },
+    "android": {
+      "package": "com.o2btechnologies.o2b",
+      "versionCode": 9.0,
+      "permissions":["CAMERA"]
+    },
+    "description": ""
+  }
+}

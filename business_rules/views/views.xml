@@ -1,0 +1,574 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="business_rules_tree">
+      <field name="name">business_rules list</field>
+      <field name="model">business_rules.business_rules</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name = "fincial_institutions"/>
+          <field name = "loan_type" optional="show"/>
+          
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="business_rules_form">
+      <field name="name">business_rules form</field>
+      <field name="model">business_rules.business_rules</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group string="Financial Institutions">
+            <group>
+                <field name="fincial_institutions" style="margin-bottom:20px;"/>
+            </group>
+            <group string="Products">
+              <group>
+                  <field name = "loan_type"  />
+
+              </group>
+              </group>
+              <group string="Secured Loan">
+                <field name="secured_loan"/>
+              </group>
+              <group string="Profile Loan">
+           
+                  <field name = "profile_loan_proprietor"/>
+                  <field name = "profile_loan_partnership"/>
+                  <field name = "profile_loan_pvt_ltd"/>
+                  <field name = "profile_loan_ltd"/>
+                  <field name = "profile_loan_salaried"/>
+        
+                </group>
+              </group>
+                
+                <group string="Industry Margin Unsecured Loan" attrs="{'invisible': [('secured_loan', '=', True)]}">
+                  <group>
+                    <label for = "industry_margins_unsecured_loans_service"/>
+                    <div class = "o_row">
+                      <field name = "industry_margins_unsecured_loans_service"/>
+                      <div attrs="{'invisible': [('industry_margins_unsecured_loans_service', '=', False)]}">
+                      <field name = "industry_margins_unsecured_loans_service_from"/>
+                    </div>
+                    </div> 
+
+
+                    <label for = "industry_margins_unsecured_loans_manufacturing"/>
+                    <div class = "o_row">
+                      <field name = "industry_margins_unsecured_loans_manufacturing"/>
+                      <div attrs="{'invisible': [('industry_margins_unsecured_loans_manufacturing', '=', False)]}">
+                      <field name = "industry_margins_unsecured_loans_manufacturing_from"/>
+                      <!-- <field name = "industry_margins_unsecured_loans_manufacturing_to" /> -->
+                    </div>
+                    </div> 
+
+
+                    <label for = "industry_margins_unsecured_loans_trade_retailer"/>
+                    <div class = "o_row">
+                      <field name = "industry_margins_unsecured_loans_trade_retailer"/>
+                      <div attrs="{'invisible': [('industry_margins_unsecured_loans_trade_retailer', '=', False)]}">
+                      <field name = "industry_margins_unsecured_loans_trade_retailer_from" />
+                      <!-- <field name = "industry_margins_unsecured_loans_trade_retailer_to" /> -->
+                    </div>
+                    </div> 
+
+
+                    <label for = "industry_margins_unsecured_loans_trade_wholesaler"/>
+                    <div class = "o_row">
+                      <field name = "industry_margins_unsecured_loans_trade_wholesaler"/>
+                      <div attrs="{'invisible': [('industry_margins_unsecured_loans_trade_wholesaler', '=', False)]}">
+                      <field name = "industry_margins_unsecured_loans_trade_wholesaler_from" /> 
+                    </div>
+                    </div> 
+
+                  </group>
+                </group>
+
+                <group string="Vintage In Work (in months)" attrs="{'invisible': [('secured_loan', '=', True)]}">
+                  <label for = "vintage_in_work_business_loan"/>
+                  <div class = "o_row">
+                    <field name = "vintage_in_work_business_loan"/>
+                    <div attrs="{'invisible': [('vintage_in_work_business_loan', '=', False)]}">
+                    <field name = "vintage_in_work_business_loan_from" style="width: 40%" /> 
+                  </div>
+                  </div>
+
+
+                  <label for = "vintage_in_work_personal_loan"/>
+                  <div class = "o_row">
+                    <field name = "vintage_in_work_personal_loan"/>
+                    <div attrs="{'invisible': [('vintage_in_work_personal_loan', '=', False)]}">
+                    <field name = "vintage_in_work_personal_loan_from" style="width: 40%%"/>
+                  </div>
+                  </div>
+
+                  <label for = "vintage_in_work_business_home_loan_senp"/>
+                  <div class = "o_row">
+                    <field name = "vintage_in_work_business_home_loan_senp"/>
+                    <div attrs="{'invisible': [('vintage_in_work_business_home_loan_senp', '=', False)]}">
+                    <field name = "vintage_in_work_business_home_loan_senp_from" style="width: 40%%"/>
+                  </div>
+                  </div>
+
+
+                  <label for = "vintage_in_work_business_home_loan_salaried"/>
+                  <div class = "o_row">
+                    <field name = "vintage_in_work_business_home_loan_salaried"/>
+                    <div attrs="{'invisible': [('vintage_in_work_business_home_loan_salaried', '=', False)]}">
+                    <field name = "vintage_in_work_business_home_loan_salaried_from" style="width: 40%%"/>
+                  </div>
+                  </div>
+
+
+                  <label for = "vintage_in_work_business_lap_senp"/>
+                  <div class = "o_row">
+                    <field name = "vintage_in_work_business_lap_senp"/>
+                    <div attrs="{'invisible': [('vintage_in_work_business_lap_senp', '=', False)]}">
+                    <field name = "vintage_in_work_business_lap_senp_from" style="width: 40%%"/>
+
+                  </div>
+                  </div>
+
+                  <label for = "vintage_in_work_business_lap_salaried"/>
+                  <div class = "o_row">
+                    <field name = "vintage_in_work_business_lap_salaried"/>
+                    <div attrs="{'invisible': [('vintage_in_work_business_lap_salaried', '=', False)]}">
+                    <field name = "vintage_in_work_business_lap_salaried_from" style="width: 40%%"/>
+
+                  </div>
+                  </div>
+
+
+                </group>
+
+
+                <group string="Servicable Non Servicable Pincode" >
+                <group>
+                    <field name = "servisable_non_servisable_pincode_unsecured_loan"/>
+                </group>
+                </group>
+                <group string="Either of residence or Business Owned">
+                  <field name = "applicable_for_unsecured_loan_personal_loan"/>
+                  <field name = "applicable_for_unsecured_loan_business_loan"/>
+                </group>
+
+
+
+                <group string = "Age">
+                <group>
+                  <label for = "age"/>
+                  <div class = "o_row">
+                    <field name = "age"/>
+                    <div attrs="{'invisible': [('age', '=', False)]}">
+                    <field name = "age_from" style="width: 40%%"/> to
+                    <field name = "age_to" style="width: 40%%"/> 
+                  </div>
+                  </div>
+
+
+                </group>
+                </group>
+    
+              <group string="Tenor (in months)">
+                <label for = "tenor"/>
+                <div class = "o_row">
+                  <field name = "tenor"/>
+                  <div attrs="{'invisible': [('tenor', '=', False)]}">
+                  <field name = "tenor_from" style="width: 40%%"/> to
+                  <field name = "tenor_to" style="width: 40%%"/>
+                </div>
+                </div>
+
+
+                
+              </group>
+    
+              
+ 
+ 
+              <group string="Loan Amount">
+              <group>
+                <label for = "loan_amount"/>
+                <div class = "o_row">
+                  <field name = "loan_amount"/>
+                  <div attrs="{'invisible': [('loan_amount', '=', False)]}">
+                  <field name = "loan_amount_from" style="width: 40%%"/> to
+                  <field name = "loan_amount_to" style="width: 40%%"/>
+                </div>
+                </div>
+              </group>
+            </group>
+
+              <group string="Property Deatils Secured Loans" attrs="{'invisible': [('secured_loan', '=', False)]}">
+              <group>
+                <field name = "property_details_secured_loan_home_loan"/>
+        
+              </group>
+              </group>
+              <group string="Market Value Secured Loan" attrs="{'invisible': [('secured_loan', '=', False)]}">
+                <group>
+                <field name="market_value_secured_loan_market_value_require"/>
+                </group>
+                </group>
+              
+              <group string="Type of Property Under Home Loan" attrs="{'invisible': [('secured_loan', '=', False)]}">
+                <group>
+                  <field name="type_of_prop_ready_property"/>
+                
+                  <field name="under_construction_builder_prop"/>
+                
+                  <field name="plot_const"/>
+                </group>
+              </group>
+
+
+              <group string="Type of Property Under Loan Against Property"  attrs="{'invisible': [('secured_loan', '=', False)]}">
+                <group>
+                  <field name="residential"/>
+                  <field name="non_resi_com_purchase"/>
+                  <field name="commercial"/>
+                  <field name="institutional"/>
+                  <field name="industrial"/>
+                  <field name="others"/>
+                </group>
+              </group>
+              <group string="Beauro Score">
+              <group>
+                <label for = "bureau_score"/>
+                <div class = "o_row">
+                  <field name = "bureau_score"/>
+                  <div attrs="{'invisible': [('bureau_score', '=', False)]}">
+                  <field name = "bureau_from" style="width: 40%%"/>
+                  <!-- <field name = "bureau_score_business_loan_to" style="width: 40%%"/> -->
+                </div>
+                </div>
+              </group>
+              </group>
+              <group string="Beauro Report">
+              <group>
+                <label for = "bureau_report_days_past_due_in_live_loans"/>
+                <div class = "o_row">
+                  <field name = "bureau_report_days_past_due_in_live_loans"/>
+                  <div attrs="{'invisible': [('bureau_report_days_past_due_in_live_loans', '=', False)]}">
+                  <field name = "bureau_report_days_past_due_in_live_loans_from" style="width: 40%%"/> 
+                  <!-- <field name = "bureau_report_days_past_due_in_live_loans_to" style="width: 40%%"/> -->
+                </div>
+                </div>
+              
+              </group>
+
+
+              <group>
+                <label for = "bureau_report_SMA_restructed"/>
+                <div class = "o_row">
+                  <field name = "bureau_report_SMA_restructed"/>
+                  <div attrs="{'invisible': [('bureau_report_SMA_restructed', '=', False)]}">
+                  <field name = "bureau_report_SMA_restructed_from" style="width: 40%%"/>
+                  <!-- <field name = "bureau_report_SMA_restructed_to" style="width: 40%%"/> -->
+                </div>
+                </div>
+              </group>
+              <group>
+                <label for = "bureau_report_Over_dues_in_creditcard_upto"/>
+                <div class = "o_row">
+                  <field name = "bureau_report_Over_dues_in_creditcard_upto"/>
+                  <div attrs="{'invisible': [('bureau_report_Over_dues_in_creditcard_upto', '=', False)]}">
+                  <field name = "bureau_report_Over_dues_in_creditcard_upto_from" style="width: 40%%"/>
+                  <!-- <field name = "bureau_report_Over_dues_in_creditcard_upto_to" style="width: 40%%"/> -->
+                </div>
+                </div>
+              </group>
+            
+              <group>
+                <label for = "enquiry"/>
+                <div class = "o_row">
+                  <field name = "enquiry"/>
+                  <div attrs="{'invisible': [('enquiry', '=', False)]}">
+                  <field name = "enquiry_from" style="width: 40%%"/>
+                  <!-- <field name = "itr_to" style="width: 40%%"/> -->
+                </div>
+                </div>
+              </group>
+              </group>
+
+              <group string="Income DOC">
+              <group>
+                <label for = "itr"/>
+                <div class = "o_row">
+                  <field name = "itr"/>
+                  <div attrs="{'invisible': [('itr', '=', False)]}">
+                  <field name = "itr_from" style="width: 40%%"/>
+                  <!-- <field name = "itr_to" style="width: 40%%"/> -->
+                </div>
+                </div>
+              </group>
+    
+              <group>
+                <label for = "banking"/>
+                <div class = "o_row">
+                  <field name = "banking"/>
+                  <div attrs="{'invisible': [('banking', '=', False)]}">
+                  <field name = "banking_from" style="width: 40%%"/>
+                </div>
+                </div>
+              </group>
+        
+              <group>
+                <label for = "gst"/>
+                <div class = "o_row">
+                  <field name = "gst"/>
+                  <div attrs="{'invisible': [('gst', '=', False)]}">
+                  <field name = "gst_from" style="width: 40%%"/>
+                  <!-- <field name = "gst_to" style="width: 40%%"/> -->
+                </div>
+                </div>
+              </group>
+              <group>
+                <field name="gst_cert"/>
+              </group>
+              <group>
+                <field name="business_proof"/>
+              </group>
+              <group>
+                <field name="salary_slip"/>
+              </group>
+              <group>
+                <field name="form16"/>
+              </group>
+              </group>
+    
+              <group string="Other Criteria">
+              <group>
+                <label for = "abb_business_loan"/>
+                <div class = "o_row">
+                  <field name = "abb_business_loan"/>
+                  <div attrs="{'invisible': [('abb_business_loan', '=', False)]}">
+                  <field name = "abb_business_loan_from" style="width: 40%%"/>
+                  <field name="abb_business_loan_dates"  style="width: 40%%"/>
+                </div>
+                </div>
+              </group>
+              <group>
+                <label for = "abb_personal_loan"/>
+                <div class = "o_row">
+                  <field name = "abb_personal_loan"/>
+                  <div attrs="{'invisible': [('abb_personal_loan', '=', False)]}">
+                  <field name = "abb_personal_loan_from" style="width: 40%%"/>
+                </div>
+                </div>
+              </group>
+              <group>
+                 <label for = "home_loan_abb"/>
+                 <div class = "o_row">
+                  <field name = "home_loan_abb"/>
+                  <div attrs="{'invisible': [('home_loan_abb', '=', False)]}">
+                  <field name = "home_loan_abb_from" style="width: 40%%"/>
+                 </div>
+                 </div>
+              </group>
+              <group>
+                  <label for = "bounce_emi"/>
+                  <div class = "o_row">
+                    <field name = "bounce_emi"/>
+                    <div attrs="{'invisible': [('bounce_emi', '=', False)]}">
+                    <field name = "bounce_emi_from" style="width: 40%%"/>
+                  </div>
+                  </div>
+                </group>
+                <group>
+                  <label for = "inward_bou"/>
+                  <div class = "o_row">
+                    <field name = "inward_bou"/>
+                    <div attrs="{'invisible': [('inward_bou', '=', False)]}">
+                    <field name = "inward_bou_from" style="width: 40%%"/>
+                  </div>
+                  </div>
+                </group>
+                <group>
+                  <label for = "min_turn_bl"/>
+                  <div class = "o_row">
+                    <field name = "min_turn_bl"/>
+                    <div attrs="{'invisible': [('min_turn_bl', '=', False)]}">
+                    <field name = "min_turn_bl_from" style="width: 40%%"/>
+                  </div>
+                  </div>
+                </group>
+                <group>
+                  <label for = "min_salary"/>
+                  <div class = "o_row">
+                    <field name = "min_salary"/>
+                    <div attrs="{'invisible': [('min_salary', '=', False)]}">
+                    <field name = "min_salary_from" style="width: 40%%"/>
+                  </div>
+                  </div>
+                </group>
+
+                <group>
+    
+                  <label for = "rate_of_interest_from"/>
+                  <div class = "o_row">
+                    <field name = "rate_of_interest_from"/>
+                    <div>
+                    <field name = "rate_of_interest_to" style="width: 40%%"/>
+                  </div>
+                  </div>
+                </group>
+
+                <group>
+    
+                  <label for = "foir"/>
+                  <div class = "o_row">
+                    <field name = "foir"/>
+                    <div attrs="{'invisible': [('foir', '=', False)]}">
+                    <field name = "foir_from" style="width: 40%%"/>
+                  </div>
+                  </div>
+                </group>
+                <group>
+                  <label for = "noftrn"/>
+                  <div class = "o_row">
+                    <field name = "noftrn"/>
+                    <div attrs="{'invisible': [('noftrn', '=', False)]}">
+                    <field name = "noftrn_from" style="width: 40%%"/>
+                  </div>
+                  </div>
+               </group>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+<!--     <record model="ir.actions.act_window" id="business_rules_action_window">
+      <field name="name">Business Rules Engine</field>
+      <field name="res_model">business_rules.business_rules</field>
+      <field name="view_id" ref="business_rules.business_rules_tree"/>
+      <field name="view_mode">tree,form</field>
+    </record> -->
+
+
+        <record id="crm_stage_action_financial_finbii_business_rules" model="ir.actions.act_window">
+        <field name="name">Business Rules</field>
+        <field name="res_model">business_rules.business_rules</field>
+        <field name="view_id" ref="business_rules.business_rules_tree"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Set a new stage in your opportunity pipeline
+          </p><p>
+            Stages allow salespersons to easily track how a specific opportunity
+            is positioned in the sales cycle.
+          </p>
+        </field>
+    </record>
+
+
+
+<record id="crm_stage_tree_financial_finbii" model="ir.ui.view">
+        <field name="name">financial.finbii.tree</field>
+        <field name="model">financial.finbii</field>
+        <field name="arch" type="xml">
+            <tree string="location pincode" multi_edit="1">
+                <field name="financial_institue"/>
+    <field name="loan_type"/>
+    <field name="average_abb_six_month"/>
+    <field name="cheque_count"/>
+    <field name="debit_transaction"/>
+    <field name="credit_transaction"/>
+    <field name="credit_submission"/>
+    <field name="roi_range"/>
+    <field name="average_salary"/>
+    <field name="fraud_indicate"/>
+    <field name="Solution"/>
+    <field name="elegible_loan_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="crm_stage_form_financial_finbii" model="ir.ui.view">
+        <field name="name">financial.finbii.form</field>
+        <field name="model">financial.finbii</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Pin Code">
+                <sheet>
+                    <group>
+                        <field name="financial_institue"/>
+                        <field name="loan_type"/>
+                        <field name="average_abb_six_month"/>
+                        <field name="cheque_count"/>
+                        <field name="debit_transaction"/>
+                        <field name="credit_transaction"/>
+                        <field name="credit_submission"/>
+                        <field name="roi_range"/>
+                        <field name="average_salary"/>
+                        <field name="fraud_indicate"/>
+                        <field name="Solution"/>
+                        <field name="elegible_loan_amount"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="crm_stage_action_financial_finbii" model="ir.actions.act_window">
+        <field name="name">Pin Code</field>
+        <field name="res_model">financial.finbii</field>
+        <field name="view_id" ref="business_rules.crm_stage_tree_financial_finbii"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Set a new stage in your opportunity pipeline
+          </p><p>
+            Stages allow salespersons to easily track how a specific opportunity
+            is positioned in the sales cycle.
+          </p>
+        </field>
+    </record>
+
+
+
+    
+
+    <!-- <record model="ir.actions.act_window" id="business_rules.action_window">
+      <field name="name">Business Rules Engine</field>
+      <field name="res_model">business_rules.business_rules</field>
+      <field name="view_id" ref="business_rules.business_rules_form"/>
+      <field name="view_mode">form</field>
+    </record> -->
+
+
+    <!-- server action to the one above -->
+
+<!--     <record model="ir.actions.server" id="business_rules.action_server">
+      <field name="name">business_rules server</field>
+      <field name="model_id" ref="model_business_rules_business_rules"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record> -->
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Business Rule" id="business_rules_menu_root" />
+
+    <!-- menu categories -->
+
+    <menuitem name="Business Rule" id="business_rules.menu_1" parent="business_rules_menu_root" action="crm_stage_action_financial_finbii_business_rules"/>
+    <!-- <menuitem name="Menu 2" id="business_rules.menu_2" parent="business_rules.menu_root"/> -->
+
+    <!-- actions -->
+
+<!--     <menuitem name="List" id="business_rules.menu_1_list" parent="business_rules.menu_1"
+              action="business_rules.action_window"/>
+    <menuitem name="Server to list" id="business_rules" parent="business_rules.menu_2"
+              action="business_rules.action_server"/> -->
+</data>
+</odoo>

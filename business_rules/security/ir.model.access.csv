@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_business_rules_business_rules,business_rules.business_rules,model_business_rules_business_rules,base.group_user,1,1,1,1
+access_financial_finbii,financial.finbii,model_financial_finbii,base.group_user,1,1,1,1
+
+

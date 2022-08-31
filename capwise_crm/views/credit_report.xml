@@ -1,0 +1,1629 @@
+<odoo>
+
+	<record id="Credit_report" model="ir.actions.report">
+		<field name ="name">Credit Report</field>
+		<field name ="model">capwise.lead</field>
+		<field name ="report_type">qweb-pdf</field>
+		<field name ="report_name">capwise_crm.report_creditscore</field>
+		<field name ="report_file">capwise_crm.report_creditscore</field>
+		<field name ="binding_model_id" ref="model_capwise_lead"></field>
+		<field name ="binding_type">report</field>
+	</record>
+
+<!-- Lets create the tempalate now  -->
+
+
+    <template id="report_creditscore">
+    	<t t-call="web.html_container">
+    		<t t-foreach="docs" t-as="doc">
+    			<t t-call="web.external_layout">
+				    <head>
+				        <title>Credit Report</title>
+				        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900; display=swap" rel="stylesheet" />
+
+				        <style>
+				        	body {
+				        	font-size: 10px !important;
+				        	}
+
+				            * {
+				                margin: 0;
+				                padding: 0;
+				                font-family: sans-serif;
+				            }
+				            .main {
+				                padding: 2rem 0;
+				            }
+				            .bx1 {
+				                padding: 1rem;
+				            }
+				            .bx1 h2 {
+				                color: #0081c7;
+				            }
+
+				            .bx2 span {
+				                color: #0081c7;
+				            }
+				            .bx3 span {
+				                color: #0081c7;
+				            }
+				            .bx4 {
+				                padding: 1rem 0;
+				            }
+				            .h-tab {
+				                background-color: #dee2e6;
+				                color: #000;
+				                padding: 1rem;
+				                border-radius: 10px;
+				            }
+				            .h-tab span {
+				                color: #2bbc75;
+				            }
+				            .h-tab .cai {
+				                font-weight: 600;
+				                display: inline-block;
+				            }
+				            .bx4 p {
+				                padding: 1rem 0;
+				            }
+				            .bx5 {
+				                padding: 1rem 0;
+				            }
+				            .bx5 p {
+				                padding: 1rem 0;
+				            }
+				            .col-blu {
+				                color: #0081c7;
+				            }
+				            .col-blks {
+				                color: #000;
+				            }
+				            .bx5 {
+				                padding: 1rem 0;
+				            }
+				            .bx6 {
+				                padding: 1rem 0;
+				            }
+				            .bx6 p {
+				                padding: 1rem 0;
+				            }
+				            .bx7 {
+				                padding: 1rem 0;
+				            }
+				            .bx7 p {
+				                padding: 1rem 0;
+				            }
+
+				            .tb{
+				                padding: 1rem 0;
+				                width : 20px !important;
+				            }
+				            .tb td{
+				            	font-size: 10px ;
+				                background-color: #dee2e6;
+				                color: #0081c7;
+				                border: 1px solid #adb5bd;
+				            }
+
+				            td {
+				            	font-size: 8px;
+				            }
+
+				            tr {
+				            font-size : 8px;
+				            }
+
+				            .tb-w{
+				                background-color: #fff;
+				            }
+
+				            .bx9 {
+				                padding: 1rem 0;
+				            }
+
+				           .bx10{
+				               padding:1rem;
+				           }
+				           .bx11{
+				               padding:1rem;
+				           }
+				           .bx12, .bx13, .bx14{
+				               padding: 1rem;
+				           }
+				        </style>
+				        <!-- CSS only	 -->
+				        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+				    </head>
+				    <body style="background-color: #dee2e6;">
+				        <section>
+				            <div class="main">
+				                <div class="container" style="background-color: #fff; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+				                    <div class="row bx1">
+				                        <div class="col-md-6">
+				                            <div class="text-left">
+				                                <img src="/capwise_crm/static/download.png" alt="logo" width="100px" />
+				                            </div>
+				                        </div>
+				                        <div class="col-md-6">
+				                            <div class="text-center">
+				                                <h2><strong>Credit Report</strong></h2>
+				                            </div>
+				                        </div>
+				                    </div>
+
+				                    <div class="row bx2">
+				                        <div class="col-md-6"></div>
+				                        <div class="col-md-6">
+				                            <div class="text-center">
+				                                <span>Finbii Report Number (FRN)</span>
+				                                : <td><t t-esc="doc.ReportNumber"/></td>
+				                            </div>
+				                        </div>
+				                    </div>
+				                    <div class="row bx3">
+				                        <div class="col-md-6"></div>
+				                        <div class="col-md-6">
+				                            <div class="text-center">
+				                                <span>Report Created</span>
+				                                : <td><t t-esc="doc.ReportDate"/></td>
+				                            </div>
+				                        </div>
+				                    </div>
+
+				                    <div class="row bx4">
+				                        <div class="">
+				                            <div class="h-tab">
+				                                <div class="">
+				                                    <span>
+				                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+				                                        </svg>
+				                                    </span>
+				                                    <div class="cai">CURRENT APPLICATION INFORMATION</div>
+				                                </div>
+				                            </div>
+				                            <div class="cont">
+				                                <p style="color:rgb(255, 123, 0);">These are the details you give us when you apply for your Experian Credit Report.</p>
+				                                <div class="table-responsive">
+				                                    <table class="table table-bordered ">
+				                                        <thead></thead>
+
+				                                        <tbody>
+				                                            <tr>
+				                                                <th class="col-blu">Name</th>
+				                                                <td><t t-esc="doc.first_name "/><t t-esc="doc.Last_Name"/></td>
+				                                                <th class="col-blu">Telephone</th>
+				                                                <td><t t-esc="doc.Telephone_Number"/></td>
+				                                            </tr>
+				                                            <tr>
+				                                                <th class="col-blu">Mobile Phone</th>
+				                                                <td><t t-esc="doc.MobilePhoneNumber"/></td>
+				                                                <th class="col-blu">Ration Card</th>
+				                                                <td><t t-esc="doc.Ration_Card_Number"/></td>
+				                                            </tr>
+				                                            <tr>
+				                                                <th scope="row" class="col-blu">Passport Number</th>
+				                                                <td><t t-esc="doc.Passport_number"/></td>
+				                                                <th class="col-blu">PAN</th>
+				                                                <td><t t-esc="doc.IncomeTaxPan"/></td>
+				                                            </tr>
+
+
+
+				                                            <tr>
+				                                                <th scope="row" class="col-blu">Email</th>
+				                                                <td><t t-esc="doc.EMailId"/></td>
+				                                                
+				                                                <th class="col-blu">Voter ID</th>
+				                                                <td><t t-esc="doc.Voter_ID_Number"/></td>
+				                                            </tr>
+
+				                                            <tr>
+				                                                <th scope="row" class="col-blu">Driving License</th>
+				                                                <td><t t-esc="doc.Driver_License_Number"/></td>
+				                                                <th class="col-blu">Aadhaar Number</th>
+				                                                <td><t t-esc="doc.Universal_ID_Number"/></td>
+				                                            </tr>
+				                                        </tbody>
+				                                    </table>
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div>
+
+				                    <div class="row bx5">
+				                        <div class="">
+				                            <div class="h-tab">
+				                                <div class="">
+				                                    <span>
+				                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+				                                        </svg> -->
+				                                    </span>
+				                                    <div class="cai">EXPERIAN CREDIT SCORE</div>
+				                                </div>
+				                            </div>
+				                            <div class="cont">
+				                                <p style="color:rgb(255, 123, 0);">Your Experian Credit Report is summarized in the form of Experian Credit Score which ranges from 300 - 900.</p>
+				                                <div class="table-responsive">
+				                                    <table class="table table-bordered">
+				                                        <thead></thead>
+
+				                                        <tbody>
+				                                            <tr style="border: none;">
+				                                                <td class="text-center" style="border: none;"><img src="/capwise_crm/static/credit-score.png" /></td>
+				                                                <th style="font-size: 2rem; border: none;" colspan="2"><t t-esc="doc.BureauScore"/></th>
+				                                            </tr>
+				                                            <tr style="border-top: 1px solid #dee2e6; border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6;">
+				                                                <td style="border: none;" colspan="2"><strong>Score Factors</strong></td>
+				                                            </tr>
+				                                            <tr style="border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6; border-bottom: transparent;">
+				                                                <td>1.</td>
+				                                                <td>Recency :</td>
+				                                                <td>Recent Credit Account Defaults</td>
+				                                            </tr>
+
+				                                            <tr style="border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6; border-bottom: transparent;">
+				                                                <td>2.</td>
+				                                                <td>Leverage :</td>
+				                                                <td>Credit Accounts with on-time re-payment history</td>
+				                                            </tr>
+				                                            <tr style="border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6; border-bottom: transparent;">
+				                                                <td>3.</td>
+				                                                <td>Coverage :</td>
+				                                                <td>Non-delinquent and delinquent Credit Accounts</td>
+				                                            </tr>
+				                                            <tr style="border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6; border-bottom: transparent;">
+				                                                <td>4.</td>
+				                                                <td>Delinquency Status :</td>
+				                                                <td>Defaults on Credit Accounts (current and recent periodic intervals)</td>
+				                                            </tr>
+				                                            <tr style="border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6;">
+				                                                <td>5.</td>
+				                                                <td>Credit Applications :</td>
+				                                                <td>Credit Account Applications over last 30 days</td>
+				                                            </tr>
+				                                        </tbody>
+				                                    </table>
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div>
+
+				                    <div class="row bx5">
+				                        <div class="">
+				                            <div class="h-tab">
+				                                <div class="">
+				                                    <span>
+				                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+				                                        </svg>
+				                                    </span>
+				                                    <div class="cai">REPORT SUMMARY</div>
+				                                </div>
+				                            </div>
+				                            <div class="table-responsive">
+				                                <table class="table table-bordered">
+				                                    <thead></thead>
+
+				                                    <tbody>
+				                                        <tr class="col-blu">
+				                                            <th>Credit Account Summary</th>
+				                                            <th>Current Balance Amount Summary</th>
+				                                            <th>Credit Enquiry Summary</th>
+				                                            <th>Non-Credit Enquiry Summary</th>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Total number of Accounts :- <strong class="col-blks"><t t-esc="doc.CreditAccountTotal"/></strong></td>
+				                                            <td class="col-blu">Total Current Bal. amt :- <strong class="col-blks"><t t-esc="doc.Outstanding_Balance_All"/></strong></td>
+				                                            <td class="col-blu">Last 7 days credit enquiries :- <strong class="col-blks"><t t-esc="doc.CAPSLast7Days"/></strong></td>
+				                                            <td class="col-blu">Last 7 days non-credit enquiries :- <strong class="col-blks"><t t-esc="doc.NonCreditCAPSLast7Days"/></strong></td>
+				                                        </tr>
+				                                        <tr>
+				                                            <td class="col-blu">Active Accounts :- <strong class="col-blks"><t t-esc="doc.CreditAccountActive"/></strong></td>
+				                                            <td class="col-blu">SF/WD/WO/Settled amt :- <strong class="col-blks"><t t-esc="doc.Written_off_Settled_Status"/></strong></td>
+				                                            <td class="col-blu">Last 30 days credit enquiries :- <strong class="col-blks"><t t-esc="doc.CAPSLast30Days"/></strong></td>
+				                                            <td class="col-blu">Last 30 days non-credit enquiries :- <strong class="col-blks"><t t-esc="doc.NonCreditCAPSLast30Days"/></strong></td>
+				                                        </tr>
+				                                        <tr>
+				                                            <td class="col-blu">Closed Accounts :- <strong class="col-blks"><t t-esc="doc.CreditAccountClosed"/></strong></td>
+				                                            <td class="col-blu">Secured Accounts amt :- <strong class="col-blks"><t t-esc="doc.Outstanding_Balance_Secured"/></strong></td>
+				                                            <td class="col-blu">Last 90 days credit enquiries :- <strong class="col-blks"><t t-esc="doc.CAPSLast90Days"/></strong></td>
+				                                            <td class="col-blu">Last 90 days non-credit enquiries :- <strong class="col-blks"><t t-esc="doc.NonCreditCAPSLast90Days"/></strong></td>
+				                                        </tr>
+				                                        <tr>
+				                                            <td class="col-blu">SF/WD/WO/SET/RES :- <strong class="col-blks"><t t-esc="doc.SuitFiled_WilfulDefault"/></strong></td>
+				                                            <td class="col-blu">Unsecured Accounts amt :- <strong class="col-blks"><t t-esc="doc.Outstanding_Balance_UnSecured"/></strong></td>
+				                                            <td class="col-blu">Last 180 days credit enquiries :- <strong class="col-blks"><t t-esc="doc.CAPSLast180Days"/></strong></td>
+				                                            <td class="col-blu">Last 180 days non-credit enquiries :- <strong class="col-blks"><t t-esc="doc.NonCreditCAPSLast180Days"/></strong></td>
+				                                        </tr>
+				                                    </tbody>
+				                                </table>
+				                            </div>
+				                        </div>
+				                    </div>
+
+				                    <div class="row bx6">
+				                        <div class="">
+				                            <div class="h-tab">
+				                                <div class="">
+				                                    <span>
+				                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+				                                        </svg>
+				                                    </span>
+				                                    <div class="cai">SUMMARY: CREDIT ACCOUNT INFORMATION</div>
+				                                </div>
+				                            </div>
+				                            <p style="color:rgb(255, 123, 0);">This section displays summary of all your reported credit accounts found in the Experian Credit Bureau database.</p>
+				                            <div class="table-responsive">
+				                                <table class="table table-bordered">
+				                                    <thead></thead>
+
+				                                    <tbody class="text-center">
+				                                        <tr class="col-blu">
+				                                            <th></th>
+				                                            <th>Lender</th>
+				                                            <th>Account type</th>
+				                                            <th>Account No</th>
+				                                            <th>Ownership</th>
+				                                            <th>Date Reported</th>
+				                                            <th>Account Status</th>
+				                                            <th>Date Opened</th>
+				                                            <th>Sanction Amt / Highest Credit</th>
+				                                            <th>Current Balance</th>
+				                                            <th>Amount Overdue</th>
+				                                        </tr>
+				                                        <t t-set="count" t-value="1" />
+				                                        <t t-foreach="doc.lender_data" t-as="lender_details">
+
+				                                        <tr>
+				                                            <td class="col-blu">Acct <t t-esc="count"/></td>
+				                                            <td><t t-esc="lender_details.Subscriber_Name"/></td>
+				                                            <td><span t-field="lender_details.Account_Type"/></td>
+				                                            <td><t t-esc="lender_details.Account_Number"/></td>
+				                                            <td><span t-field="lender_details.Portfolio_Type"/></td>
+				                                            <td><t t-esc="lender_details.Date_Reported"/></td>
+				                                            <td><span t-field="lender_details.Account_Status"/></td>
+				                                            <td><t t-esc="lender_details.Open_Date"/></td>
+				                                            <td><t t-esc="lender_details.Highest_Credit_or_Original_Loan_Amount"/></td>
+				                                            <td><t t-esc="lender_details.Current_Balance"/></td>
+				                                            <td><t t-esc="lender_details.Amount_Past_Due"/></td>
+				                                        </tr>
+				                                        <t t-set="count" t-value="count + 1"/>
+				                                    </t>
+				                                    </tbody>
+				                                </table>
+				                            </div>
+				                        </div>
+				                    </div>
+
+				                    <div class="row bx7">
+				                        <div class="">
+				                            <div class="h-tab">
+				                                <div class="">
+				                                    <span>
+				                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+				                                        </svg>
+				                                    </span>
+				                                    <div class="cai">CREDIT ACCOUNT INFORMATION DETAILS</div>
+				                                </div>
+				                            </div>
+				                            <p style="color:rgb(255, 123, 0);">This section has information based on the details provided to Experian by all our member banks, credit / financial institutions and other credit grantors with whom you have a credit / loan account.</p>
+				                            </div>
+				                    </div>
+
+				                    	<t t-set="count" t-value="1" />
+				                        <t t-foreach="doc.lender_data" t-as="lender_details">
+
+				                            <div class="table-responsive">
+				                                <table class="table table-bordered">
+				                                    <thead></thead>
+
+				                                    <tbody class="">
+				                                        <tr class="col-blu">
+				                                            <th><span t-field="lender_details.Account_Type"/></th>
+				                                            <th><t t-esc="lender_details.Subscriber_Name"/></th>
+				                                            <th colspan="4">
+				                                                <span style="color: #2bbc75;">
+				                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                                        <path
+				                                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+				                                                        />
+				                                                    </svg>
+				                                                </span>
+				                                                Acct <t t-esc="count"/>
+				                                            </th>
+				                                        </tr>
+				                                        <tr>
+				                                            <td colspan="6"><t t-esc="lender_details.name"/></td>
+				                                        </tr>
+				                                        
+				                                        <t t-set="add_count" t-value="1"/>
+				                                        <t t-foreach="lender_details.addres_data" t-as="address_details">
+				                                        	<tr>
+				                                            <td class="col-blu">Addresss <t t-esc="add_count"/></td>
+				                                            <td colspan="5"><t t-esc="address_details.address"/></td>
+				                                            </tr>
+				                                            <t t-set="add_count" t-value="add_count + 1"/>
+				                                        </t>
+				                                        
+				                                    </tbody>
+
+				                                    <tbody style="table-layout: auto;">
+				                                        <tr>
+				                                            <th class="col-blu" colspan="6">Credit Account details</th>
+				                                        </tr>
+				                                        <tr>
+				                                            <td class="col-blu" width="width : 10px;"><strong>Account terms</strong></td>
+				                                            <td class="col-blu"></td>
+
+				                                            <td class="col-blu"><strong>Account description</strong></td>
+				                                            <td class="col-blu"></td>
+				                                            <td class="col-blu"><strong>Account details</strong></td>
+				                                            <td class="col-blu"></td>
+				                                        </tr>
+				                                        <tr>
+				                                            <td class="col-blu">Account Number</td>
+				                                            <td><t t-esc="lender_details.Account_Number"/></td>
+				                                            <td class="col-blu">Date Reported </td>
+				                                            <td><t t-esc="lender_details.Date_Reported"/></td>
+				                                            <td class="col-blu">Credit Limit Amt</td>
+				                                            <td><t t-esc="lender_details.Credit_Limit_Amount"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Date Opened</td>
+				                                            <td><t t-esc="lender_details.Open_Date"/></td>
+				                                            <td class="col-blu">Loan Type </td>
+				                                            <td><span t-field="lender_details.Account_Type"/></td>
+				                                            <td class="col-blu">EMI</td>
+				                                            <td><t t-esc="lender_details.Scheduled_Monthly_Payment_Amount"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Date Closed</td>
+				                                            <td><t t-esc="lender_details.Date_Closed"/></td>
+				                                            <td class="col-blu">Account Status</td>
+				                                            <td><span t-field="lender_details.Account_Status"/></td>
+				                                            <td class="col-blu">Repayment Tenure</td>
+				                                            <td><t t-esc="lender_details.Repayment_Tenure"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Ownership</td>
+				                                            <td><span t-field="lender_details.Portfolio_Type"/></td>
+				                                            <td class="col-blu">Highest Credit </td>
+				                                            <td><t t-esc="lender_details.Highest_Credit_or_Original_Loan_Amount"/></td>
+				                                            <td class="col-blu">Total Write-off Amt </td>
+				                                            <td><t t-esc="lender_details.Written_Off_Amt_Total"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Rate of Interest </td>
+				                                            <td><t t-esc="lender_details.Rate_of_Interest"/></td>
+				                                            <td class="col-blu">Current Balance</td>
+				                                            <td><t t-esc="lender_details.Current_Balance"/></td>
+				                                            <td class="col-blu">Principal Write-off </td>
+				                                            <td><t t-esc="lender_details.Written_Off_Amt_Principal"/></td>
+				                                        </tr>
+				                                        
+				                                        <tr>
+				                                            <td class="col-blu">Value of Collateral</td>
+				                                            <td><t t-esc="lender_details.Value_of_Collateral"/></td>
+				                                            <td class="col-blu">Amount Overdue </td>
+				                                            <td><t t-esc="lender_details.Amount_Past_Due"/></td>
+				                                            <td class="col-blu">Settlement Amt</td>
+				                                            <td><t t-esc="lender_details.Settlement_Amount"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Type of Collateral</td>
+				                                            <td><t t-esc="lender_details.Type_of_Collateral"/></td>
+				                                            <td class="col-blu">Last Payment Date</td>
+				                                            <td><t t-esc="lender_details.Date_of_Last_Payment"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">SuitFiled Willful Default WrittenOff Status</td>
+				                                            <td><t t-esc="lender_details.SuitFiledWillfulDefaultWrittenOffStatus"/></td>
+				                                            <td class="col-blu">SuitFiled Willful Default</td>
+				                                            <td><t t-esc="lender_details.SuitFiled_WilfulDefault"/></td>
+				                                            <td class="col-blu">Written off Settled Status</td>
+				                                            <td><span t-field="lender_details.Written_off_Settled_Status"/></td>
+				                                        </tr>
+<!-- 				                                        <tr>
+				                                            <td class="col-blu" ><strong>Payment History</strong></td>
+				                                        </tr> -->
+				                                    </tbody>
+				                                </table>
+				                            </div>
+				                        
+
+
+
+				                    <div class="row bx8">
+				                        <div class="col-md-12">
+				                            <div class="">
+				                                <p class="col-blu"><strong>Payment History</strong></p>
+				                           <div class="tb">
+				                               <table class="table table-bordered">
+				                                   <tbody>
+				                                       <!-- <tr>
+				                                           <td style="background-color: #dee2e6; text-align:center;">DPD</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Dec</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Nov</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Oct</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Sep</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Aug</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Jul</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Jun</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">May</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Apr</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Mar</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Feb</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Jan</td>
+				                                       </tr>
+				                                       <tr style="text-align: center;">
+				                                       	<t t-set="payment" t-value="0"/>
+				                                       	<t t-foreach="lender_details.payment_hist" t-as="payment_details">
+				                                       		<tr><t t-if="payment != payment_details.Year">
+				                                        <td>
+				                                        	<t t-esc="payment_details.Year"/> 
+				                                        	
+				                                        </td>
+				                                        <t t-set="payment" t-value="payment_details.Year"/>
+				                                        </t>
+
+
+				                                      	<td class="tb-w"><t t-if="payment_details.Month == '12'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '11'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '10'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '09'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '08'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '07'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '06'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '05'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '04'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '03'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '02'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                        <td class="tb-w"><t t-if="payment_details.Month == '01'"><t style="background-color: #2bbc75; color: #fff:" t-esc="payment_details.Days_Past_Due"/></t></td>
+				                                    </tr>
+				                                    
+				                                    </t>
+
+				                                    </tr> -->
+
+				                                  <tr style="text-align: center;">
+				                                       	<!-- <t t-set="payment" t-value="0"/> -->
+				                                       	<t t-foreach="lender_details.payment_hist" t-as="payment_details">
+
+				                                        <td style="display : flex; flex-direction : row; width : 1000px;" class="tb-w">
+				                                        	<h4>
+				                                        	<t t-esc="payment_details.Days_Past_Due"/></h4>
+				                                        	<h4>
+				                                        	
+				                                        	<t t-esc="payment_details.Year"/>/<t t-esc="payment_details.Month"/>
+				                                        	</h4>
+				                   
+				                                        	
+				                                        </td>
+				                                    
+				                                    </t>
+
+				                                    </tr>
+				                                   </tbody>
+				                               </table>
+				                           </div>
+				                                
+				                            </div>
+				                        </div>
+				                    </div>
+
+
+
+
+
+				                    <div class="row bx9">
+				                        <div class="col-md-12">
+				                            <div class="">
+				                                <p class="col-blu"><strong>Consumer Personal details on the Credit Account</strong></p>
+				                           <div class="table-responsive">
+				                               <table class="table table-bordered">
+				                                   <tbody>
+				                                       <tr>
+				                                           <td class="col-blu">Date of Birth</td>
+				                                           <td><t t-esc="lender_details.Date_of_birth"/></td>
+				                                          
+				                                           <td class="col-blu">Phone Type</td>
+				                                           <td class="col-blu" >Phone Number</td>
+				                                           <td class="col-blu">Extension</td>
+				                                          
+<!-- 				                                           <td class="col-blu" >Phone Type</td>
+				                                           <td class="col-blu">Phone Number</td>
+				                                           <td class="col-blu">Extension</td> -->
+				                                          
+				                                           <td class="col-blu" >ID Type</td>
+				                                           <td class="col-blu">ID Number</td>
+				                                           <td class="col-blu" >Date of issue</td>
+				                                           <td class="col-blu">Date of Expiry</td>
+				                                       </tr>
+				                                       <tr>
+				                                        <td class="col-blu">Gender </td>
+				                                        <td><t t-esc="lender_details.Gender_Code"/></td>
+				                                        
+				                                        <!-- <td>Mobile </td>
+				                                        <td><t t-esc="lender_details.MobilePhoneNumber"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Telephone_Extension"/></td>
+				                                        -->
+				                                        <td class="col-blu">Mobile</td>
+				                                        <td class=""><t t-esc="lender_details.MobilePhoneNumber"/></td>
+				                                        <td class="col-blu" ><t t-esc="lender_details.Telephone_Extension"/></td>
+				                                       
+				                                        <td class="col-blu">PAN</td>
+				                                        <td class=""><t t-esc="lender_details.IncomeTaxPan"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.PAN_Issue_Date"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.PAN_Expiration_Date"/></td>
+				                                    </tr>
+				                                    <tr>
+				                                        <td class="col-blu">Occupation</td>
+				                                        <td><t t-esc="lender_details.Occupation_Code"/></td>
+				                                      
+<!-- 				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td> -->
+				                                     
+				                                        <td class="col-blu">-</td>
+														<td></td>
+				                                        <td class="col-blu">-</td>
+				                                       
+				                                        <td class="col-blu">Passport</td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Passport_number"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Passport_Issue_Date"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Passport_Expiration_Date"/></td>
+				                                    </tr>
+				                                    <tr>
+				                                        <td class="col-blu">Email address</td>
+				                                        <td><t t-esc="doc.EMailId"/></td>
+				                                        <!-- <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td> -->
+				                                        <td class="col-blu">-</td>
+														<td>-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Voter ID </td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Voter_ID_Number"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Voter_ID_Issue_Date"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Voter_ID_Expiration_Date"/></td>
+				                                    </tr>
+
+				                                    <tr>
+				                                        <td class="col-blu">-</td>
+				                                        <td>-</td>
+<!-- 				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td> -->
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Aadhaar/UID</td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Universal_ID_Number"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Universal_ID_Issue_Date"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Universal_ID_Expiration_Date"/></td>
+				                                    </tr>
+
+				                                    <tr>
+				                                        <td class="col-blu">-</td>
+				                                        <td>-</td>
+<!-- 				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td> -->
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Driving License</td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Driver_License_Number"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Driver_License_Issue_Date"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Driver_License_Expiration_Date"/></td>
+				                                    </tr>
+				                                    <tr>
+				                                        <td class="col-blu">-</td>
+				                                        <td>-</td>
+<!-- 				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td> -->
+				                                        <td class="col-blu">-</td> 
+				                                        <td class="col-blu">-</td> 
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Ration Card</td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Ration_Card_Number"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Ration_Card_Issue_Date"/></td>
+				                                        <td class="col-blu"><t t-esc="lender_details.Ration_Card_Expiration_Date"/></td>
+				                                    </tr>
+				                                   </tbody>
+				                               </table>
+				                           </div>
+				                                
+				                            </div>
+				                        </div>
+				                    </div>
+
+
+									
+				            
+				                           
+				                    <t t-set="count" t-value="count + 1"/>
+
+				                </t>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				                    <!-- <div class="row bx7">
+				                        <div class="">
+				                            <div class="table-responsive">
+				                                <table class="table table-bordered">
+				                                    <thead></thead>
+
+				                                    <tbody class="">
+				                                        <tr class="col-blu">
+				                                            <th>CREDIT CARDS</th>
+				                                            <th>American Express Banking Corp </th>
+				                                            <th colspan="4">
+				                                                <span style="color: #2bbc75;">
+				                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                                        <path
+				                                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+				                                                        />
+				                                                    </svg>
+				                                                </span>
+				                                                Acct 2
+				                                            </th>
+				                                        </tr>
+				                                        <tr>
+				                                            <td colspan="6"><t t-esc="doc.first_name"/><t t-esc="doc.Last_Name"/></td>
+				                                        </tr>
+				                                        <tr>
+				                                            <td class="col-blu">Addresss 1</td>
+				                                            <td colspan="5"><t t-esc="doc.First_Line_Of_Address_non_normalized"/></td>
+				                                        </tr>
+				                                        <tr>
+				                                     
+				                                        </tr>
+				                                    </tbody>
+
+				                                    <tbody>
+				                                        <tr>
+				                                            <th class="col-blu" colspan="6">Credit Account details</th>
+				                                        </tr>
+				                                        <tr>
+				                                            <td colspan="2" class="col-blu"><strong>Account terms</strong></td>
+				                                            <td colspan="2" class="col-blu"><strong>Account description</strong></td>
+				                                            <td colspan="2" class="col-blu"><strong>Account details</strong></td>
+				                                        </tr>
+				                                        <tr>
+				                                            <td class="col-blu">Account Number</td>
+				                                            <td><t t-esc="doc.Account_Number"/></td>
+				                                            <td class="col-blu">Date Reported </td>
+				                                            <td><t t-esc="doc.Date_Reported"/></td>
+				                                            <td class="col-blu">Credit Limit Amt</td>
+				                                            <td><t t-esc="doc.Credit_Limit_Amount"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Date Opened</td>
+				                                            <td><t t-esc="doc.Open_Date"/></td>
+				                                            <td class="col-blu">Loan Type </td>
+				                                            <td><t t-esc="doc.Account_Type"/></td>
+				                                            <td class="col-blu">EMI</td>
+				                                            <td><t t-esc="doc.Scheduled_Monthly_Payment_Amount"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Date Closed</td>
+				                                            <td><t t-esc="doc.Date_Closed"/></td>
+				                                            <td class="col-blu">Account Status</td>
+				                                            <td><t t-esc="doc.Account_Status"/></td>
+				                                            <td class="col-blu">Repayment Tenure</td>
+				                                            <td><t t-esc="doc.Repayment_Tenure"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Ownership</td>
+				                                            <td><t t-esc="doc.AccountHoldertypeCode"/></td>
+				                                            <td class="col-blu">Highest Credit </td>
+				                                            <td><t t-esc="doc.Highest_Credit_or_Original_Loan_Amount"/></td>
+				                                            <td class="col-blu">Total Write-off Amt </td>
+				                                            <td><t t-esc="doc.Written_Off_Amt_Total"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Rate of Interest </td>
+				                                            <td><t t-esc="doc.Rate_of_Interest"/></td>
+				                                            <td class="col-blu">Current Balance</td>
+				                                            <td><t t-esc="doc.Current_Balance"/></td>
+				                                            <td class="col-blu">Principal Write-off </td>
+				                                            <td><t t-esc="doc.Written_Off_Amt_Principal"/></td>
+				                                        </tr>
+				                                        
+				                                        <tr>
+				                                            <td class="col-blu">Value of Collateral</td>
+				                                            <td><t t-esc="doc.Value_of_Collateral"/></td>
+				                                            <td class="col-blu">Amount Overdue </td>
+				                                            <td><t t-esc="doc.Amount_Past_Due"/></td>
+				                                            <td class="col-blu">Settlement Amt</td>
+				                                            <td><t t-esc="doc.Settlement_Amount"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">Type of Collaterall</td>
+				                                            <td><t t-esc="doc.Type_of_Collateral"/></td>
+				                                            <td class="col-blu">Last Payment Date</td>
+				                                            <td colspan="3"><t t-esc="doc.Date_of_Last_Payment"/></td>
+				                                        </tr>
+
+				                                        <tr>
+				                                            <td class="col-blu">SuitFiled Willful Default WrittenOff Status</td>
+				                                            <td><t t-esc="doc.SuitFiledWillfulDefaultWrittenOffStatus"/></td>
+				                                            <td class="col-blu">SuitFiled Willful Default</td>
+				                                            <td><t t-esc="doc.SuitFiled_WilfulDefault"/></td>
+				                                            <td class="col-blu">Written off Settled Status</td>
+				                                            <td><t t-esc="doc.Written_off_Settled_Status"/></td>
+				                                        </tr>
+				                                        <tr>
+				                                            <td class="col-blu" colspan="6"><strong>Payment History</strong></td>
+				                                        </tr>
+				                                    </tbody>
+				                                </table>
+				                            </div>
+				                        </div>
+				                    </div> -->
+
+				                    
+
+				                    <!-- <div class="row bx8">
+				                        <div class="col-md-12">
+				                            <div class="">
+				                                <p class="col-blu"><strong>Payment History</strong></p>
+				                           <div class="tb">
+				                               <table class="table table-bordered">
+				                                   <tbody>
+				                                       <tr>
+				                                           <td style="background-color: #dee2e6; text-align:center;">DPD</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Dec</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Nov</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Oct</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Sep</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Aug</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Jul</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Jun</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">May</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Apr</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Mar</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Feb</td>
+				                                           <td style="background-color: #dee2e6; text-align:center;">Jan</td>
+				                                       </tr>
+				                                       <tr style="text-align: center;">
+				                                        <td>2021</td>
+				                                        <td class="tb-w"></td>
+				                                        <td class="tb-w"></td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" tyle="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" tyle="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                    </tr>
+				                                       <tr style="text-align: center;">
+				                                        <td>2020</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w" style="background-color: #2bbc75; color: #fff;">0</td>
+				                                        <td class="tb-w"></td>
+				                                        <td class="tb-w"></td>
+				                                        <td class="tb-w"></td>
+				                                        <td class="tb-w"></td>
+				                                        <td class="tb-w"></td>
+				                                        <td class="tb-w"></td>
+				                                        <td class="tb-w"></td>
+				                                    </tr>
+				                                   </tbody>
+				                               </table>
+				                           </div>
+				                                
+				                            </div>
+				                        </div>
+				                    </div> -->
+
+
+
+
+
+				                    <!-- <div class="row bx10">
+				                        <div class="col-md-12">
+				                            <div class="">
+				                                <p class="col-blu"><strong>Consumer Personal details on the Credit Account</strong></p>
+				                           <div class="table-responsive">
+				                               <table class="table table-bordered">
+				                                   <tbody>
+				                                       <tr>
+				                                           <td class="col-blu">Date of Birth</td>
+				                                           <td><t t-esc="doc.Date_of_birth"/></td>
+				                                           <td class="col-blu">Phone Type</td>
+														   <td><t t-esc="doc.Telephone_Extension"/></td>
+				                                           <td class="col-blu">Phone Number</td>	
+														   <td><t t-esc="doc.MobilePhoneNumber"/></td>
+				                                           <td class="col-blu">Extension</td>
+														   <td><t t-esc="doc.Telephone_Extension"/></td>
+				                                           <td class="col-blu">Phone Type</td>
+														   <td><t t-esc="doc.Telephone_Extension"/></td>
+				                                           <td class="col-blu">Phone Number</td>
+				                                           <td class="col-blu">Extension</td>
+														   <td><t t-esc="doc.Telephone_Extension"/></td>
+				                                           <td class="col-blu">ID Type</td>
+				                                           <td class="col-blu">ID Number</td>
+				                                           <td class="col-blu">Date of issue</td>
+				                                           <td class="col-blu">Date of Expiry</td>
+				                                       </tr>
+				                                       <tr>
+				                                        <td class="col-blu">Gender </td>
+				                                        <td><t t-esc="doc.Gender_Code"/></td>
+				                                        <td class="col-blu">Mobile </td>
+				                                        <td class=""><t t-esc="doc.MobilePhoneNumber"/></td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Mobile</td>
+				                                        <td class=""><t t-esc="doc.MobilePhoneNumber"/></td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">PAN</td>
+				                                        <td class=""><t t-esc="doc.Income_TAX_PAN"/></td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                    </tr>
+				                                    <tr>
+				                                        <td class="col-blu">Occupation</td>
+				                                        <td><t t-esc="doc.Occupation_Code"/></td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Passport</td>
+														<td><t t-esc="doc.Passport_number"/></td>
+
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                    </tr>
+				                                    <tr>
+				                                        <td class="col-blu">Email address</td>
+				                                        <td><t t-esc="doc.EMailId"/></td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Voter ID </td>
+				                                        <td class="col-blu"><t t-esc="doc.Voter_ID_Number"/></td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                    </tr>
+
+				                                    <tr>
+				                                        <td class="col-blu">-</td>
+				                                        <td>-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Aadhaar/UID</td>
+				                                        <td class="col-blu"><t t-esc="doc.Universal_ID_Number"/></td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                    </tr>
+
+				                                    <tr>
+				                                        <td class="col-blu">-</td>
+				                                        <td>-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Driving License</td>
+				                                        <td class="col-blu"><t t-esc="doc.Driver_License_Number"/></td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                    </tr>
+				                                    <tr>
+				                                        <td class="col-blu">-</td>
+				                                        <td>-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">Ration Card</td>
+				                                        <td class="col-blu"><t t-esc="doc.Ration_Card_Number"/></td>
+				                                        <td class="col-blu">-</td>
+				                                        <td class="col-blu">-</td>
+				                                    </tr>
+				                                   </tbody>
+				                               </table>
+				                           </div>
+				                                
+				                            </div>
+				                        </div>
+				                    </div> -->
+
+
+				                    <div class="row bx11">
+				                        <div class="col-md-12">
+				                            <div class="h-tab">
+				                                <div class="">
+				                                    <span>
+				                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+				                                        </svg>
+				                                    </span>
+				                                    <div class="cai">CREDIT ENQUIRIES </div>
+				                                    <!-- <div  class="col-blu" style="float: right;">Records Found : </div> -->
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div> 
+				                    <div class="row bx12">
+				                        <div class="col-md-12">
+				                           <div class="" style="color:rgb(255, 123, 0);">
+				                            This section shows the names of the credit institutions that have processed a credit / loan application for you.
+
+				                            <t t-set="count" t-value="1" />
+											<t t-foreach="doc.credit_enquiries" t-as="credit_enquiries">
+
+
+											<div class="table-responsive">
+												<table class="table table-bordered">
+													<thead></thead>
+
+													<tbody class="">
+														<tr>
+															<td colspan="6">Name :- 
+															<t t-esc="credit_enquiries.First_Name "/>
+															</td>
+														</tr>
+														<tr>
+															<td class="col-blu">Addresss 1</td>
+															<td colspan="5"><t t-esc="doc.First_Line_Of_Address_non_normalized"/></td>
+														</tr>
+														<tr>
+																<td class="col-blu">
+																	cr ENQ <t t-esc="count"/>
+																	<t t-set="count" t-value="count + 1" /> 
+																</td>
+														</tr>
+													</tbody>
+
+													<tbody>
+														<tr>
+															<td class="col-blu">Date Of Birth</td>
+															<td><t t-esc="credit_enquiries.Date_Of_Birth_Applicant"/></td>
+															<td class="col-blu">PAN</td>
+															<td><t t-esc="credit_enquiries.IncomeTaxPan"/></td>
+															<td class="col-blu">ERN</td>
+															<td><t t-esc="credit_enquiries.ReportNumber"/></td>
+														</tr>
+
+														<tr>
+															<td class="col-blu">Telephone</td>
+															<td><t t-esc="credit_enquiries.Telephone_Number_Applicant_1st"/></td>
+															<td class="col-blu">Passport Number</td>
+															<td><t t-esc="credit_enquiries.Passport_number"/></td>
+															<td class="col-blu">Search Type</td>
+															<td><span t-field="credit_enquiries.Enquiry_Reason"/></td>
+														</tr>
+
+														<tr>
+															<td class="col-blu">Mobile Phone</td>
+															<td><t t-esc="credit_enquiries.MobilePhoneNumber"/></td>
+															<td class="col-blu">Voter ID</td>
+															<td><t t-esc="credit_enquiries.Voter_s_Identity_Card"/></td>
+															<td class="col-blu">Credit Institution Name</td>
+															<td><t t-esc="credit_enquiries.Subscriber_Name"/></td>
+														</tr>
+
+														<tr>
+															<td class="col-blu">Gender</td>
+															<td><span t-field="credit_enquiries.Gender_Code"/></td>
+															<td class="col-blu">Driving License</td>
+															<td><t t-esc="credit_enquiries.Driver_License_Number"/></td>
+															<td class="col-blu">Application Date</td>
+															<td><t t-esc="credit_enquiries.Date_of_Request"/></td>
+														</tr>
+
+														<tr>
+															<td class="col-blu">Marital Status</td>
+															<td><span t-field="credit_enquiries.Marital_Status"/></td>
+															<td class="col-blu">Ration Card</td>
+															<td><t t-esc="credit_enquiries.Ration_Card_Number"/></td>
+															<td class="col-blu">Amount Applied For</td>
+															<td><t t-esc="credit_enquiries.Amount_Financed"/></td>
+														</tr>
+														
+														<tr>
+															<td class="col-blu">Email</td>
+															<td><t t-esc="credit_enquiries.EMailId"/></td>
+															<td class="col-blu"></td>
+															<td></td>
+															<td class="col-blu">Duration Of Agreement</td>
+															<td><t t-esc="credit_enquiries.Duration_Of_Agreement"/></td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+											</t>
+
+
+				                           </div>
+				                        </div>
+				                    </div>
+
+									
+
+
+
+				                    <div class="row bx11">
+				                        <div class="col-md-12">
+				                            <div class="h-tab">
+				                                <div class="">
+				                                    <span>
+				                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+				                                        </svg>
+				                                    </span>
+				                                    <div class="cai">NON-CREDIT ENQUIRIES </div>
+				                                    <div  class="col-blu" style="float: right;">No Records Found</div>
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div> 
+				                    <!-- <div class="row bx12">
+				                        <div class="col-md-12">
+				                           <div class="" style="color:rgb(255, 123, 0);">
+				                            This section shows non-credit enquiries such as authentication requests and request for your Experian Credit Report and Credit Score by you.
+											<div class="table-responsive">
+												<table class="table table-bordered">
+													<thead></thead>
+
+													<tbody class="">
+														<tr>
+															<td colspan="6"><t t-esc="doc.first_Name "/><t t-esc="doc.Last_Name"/></td>
+														</tr>
+														<tr>
+															<td class="col-blu">Addresss 1</td>
+															<td colspan="5">FLAT NO 604 PUSHPI APPT KALAYANER 1ST FL R SHAROA NGR NR DURGA MNDIR PARK NAVEEN NGR Uttar Pradesh 208025</td>
+														</tr>
+														<tr>
+													
+														</tr>
+													</tbody>
+
+													<tbody>
+														<tr>
+															<td class="col-blu">Date Of Birth</td>
+															<td><t t-esc="doc.Date_Of_Birth_Applicant"/></td>
+															<td class="col-blu">PAN</td>
+															<td><t t-esc="doc.IncomeTaxPan"/></td>
+															<td class="col-blu">ERN</td>
+															<td><t t-esc="doc.ReportNumber"/></td>
+														</tr>
+
+														<tr>
+															<td class="col-blu">Telephone</td>
+															<td><t t-esc="doc.Telephone_Number_Applicant_1st"/></td>
+															<td class="col-blu">Passport Number</td>
+															<td><t t-esc="doc.Passport_number"/></td>
+															<td class="col-blu">Search Type</td>
+															<td><t t-esc="doc.Enquiry_Reason"/></td>
+														</tr>
+
+														<tr>
+															<td class="col-blu">Mobile Phone</td>
+															<td><t t-esc="doc.MobilePhoneNumber"/></td>
+															<td class="col-blu">Voter ID</td>
+															<td><t t-esc="doc.Voter_s_Identity_Card"/></td>
+															<td class="col-blu">Credit Institution Name</td>
+															<td><t t-esc="doc.Subscriber_Name"/></td>
+														</tr>
+
+														<tr>
+															<td class="col-blu">Gender</td>
+															<td><t t-esc="doc.Gender_Code"/></td>
+															<td class="col-blu">Driving License</td>
+															<td><t t-esc="doc.Driver_License_Number"/></td>
+															<td class="col-blu">Application Date</td>
+															<td><t t-esc="doc.Date_of_Request"/></td>
+														</tr>
+
+														<tr>
+															<td class="col-blu">Marital Status</td>
+															<td><t t-esc="doc.Marital_Status"/></td>
+															<td class="col-blu">Ration Card</td>
+															<td><t t-esc="doc.Ration_Card_Number"/></td>
+															<td class="col-blu">Amount Applied For</td>
+															<td><t t-esc="doc.Amount_Financed"/></td>
+														</tr>
+														
+														<tr>
+															<td class="col-blu">Email</td>
+															<td><t t-esc="doc.EMailId"/></td>
+															<td class="col-blu"></td>
+															<td></td>
+															<td class="col-blu">Duration Of Agreement</td>
+															<td><t t-esc="doc.Duration_Of_Agreement"/></td>
+														</tr>
+
+													</tbody>
+												</table>
+											</div>
+				                           </div>
+				                        </div>
+				                    </div>
+
+ -->
+
+
+
+				                    
+				                    <div class="row bx11">
+				                        <div class="col-md-12">
+				                            <div class="h-tab">
+				                                <div class="">
+				                                    <span>
+				                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+				                                        </svg>
+				                                    </span>
+				                                    <div class="cai">CONTACTING US</div>
+				                                   
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div> 
+				                    <div class="row bx12">
+				                        <div class="col-md-12">
+				                           <div class="">
+				                            f you find a discrepancy in your report, it is important to quickly raise it with your lender.Under the Credit Information Companies (Regulation) Act 2005 and as per the guidelines set by
+				                            the Reserve Bank of India, Experian Credit Information Company of India Private Limited is not authorized to change any data in your credit information report without authorisation from
+				                            your lender. However, we would be happy to help you with this process. If you would like us to help please visit https://consumer.experian.in/ECV-OLN/ to raise a dispute regarding the
+				                            discrepancy.
+				                           </div>
+				                        </div>
+				                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				                        
+				                    <div class="row bx13">
+				                        <div class="col-md-12">
+				                            <div class="h-tab">
+				                                <div class="">
+				                                    <span>
+				                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+				                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+				                                        </svg>
+				                                    </span>
+				                                    <div class="cai">LEGEND</div>
+				                                   
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div> 
+				                    <div class="row bx14">
+				                        <div class="col-md-12">
+				                           <div class="">
+				                       <ul>
+				                           <li style="color:#0081c7;">SF/WD/WO/SET/RES : Credit Accounts that are Suit Filed/ Wilful Default/ Written Off/ Settled/ Restructured.</li>
+				                           <li style="color:#0081c7;">Active* : Credit accounts which are less than 90 days past due.</li>
+				                           <li style="color:#0081c7;">Active** : Credit accounts which are over 90 days past due.</li>
+				                           <li style="color:#0081c7;">Active** : Credit accounts which are over 90 days past due.</li>
+				                           <li style="color:#0081c7;">DPD : Days Past Due. Number of days that have passed from the agreed payment due date of EMI</li>
+				                           <li style="color:#0081c7;">o DPD '0' : The number '0' in the circle indicates that the Payment is made as agreed and the credit account is up to date</li>
+				                           <li style="color:#0081c7;">o DPD >0 : The number in the circle indicates the "Days Past Due" reported by the respective lender.</li>
+				                           <li style="color:#0081c7;">When the below alphabets are shown in the DPD table, it means the lender is reporting Asset Classification and indicates the following:</li>
+				                           <li style="color:#0081c7;">When the below alphabets are shown in the DPD table, it means the lender is reporting Asset Classification and indicates the following</li>
+				                           <li style="color:#0081c7;">M : Special Mention: These accounts are "Standard" assets but for some discrepancy the lending organization would like to monitor this account closely</li>
+				                           <li style="color:#0081c7;">B : Substandard: An account which is overdue by 90 days for a period of less than or equal to 12 months is classified as Substandard asset as per RBI guidelines</li>
+				                           <li style="color:#0081c7;">D : Doubtful: An account which is overdue by 90 days for more than 12 months is classified as doubtful asset as per RBI guidelines.</li>
+				                           <li style="color:#0081c7;">L : Loss: An account where loss has been identified but the amount has not been written off, wholly or partially is classified as Loss asset as per RBI guidelines.</li>
+				                       </ul>
+				                           </div>
+				                        </div>
+				                    </div>
+
+
+				                    <div class="row bx15">
+				                        <div class="col-md-12 ">
+				                           <div class="text-center" style="padding: 1rem; color: #8c9095;">
+				                  
+				                           </div>
+				                        </div>
+				                    </div>
+				                    <div class="row bx16">
+				                        <div class="col-md-12">
+				                            <p style="text-align: justify; padding: 1rem; color: #8c9095;">
+				                                Experian Credit Information Company of India Private Limited ("ECICI") is registered as a Credit Information Company with the Reserve Bank of India. ECICI has empanelled several
+				credit institutions / specified users ("Members") with it, from whom it collects information / data for the bureau operations. The current Experian Credit Information Report and Experian
+				Credit Score ("Report") is a reflection of this information / data as submitted by the Member to ECICI. The Report may thus be limited to the information / data contributed by the Member.
+				The information / data provided in the Report is as current and up to date as provided by the Members. The Report is not a guarantee of any particular outcome and you may therefore
+				not use any information, in full or in part, as the sole basis for any decision you take. ECICI does not accept any responsibility for any loss that may arise to you from relying on the
+				information / data in the Report. ECICI will use all reasonable skill and care in the supply of the information / data to you. However since we obtain the information / data from the Member,
+				ECICI cannot guarantee or warranty that the information contained in the Report is complete, accurate, up-to-date or error-free. Any information contained herein does not reflect the
+				views of ECICI or its directors or employees.
+
+				                            </p>
+				                            <p style="text-align: justify; padding: 1rem; color: #8c9095;">This message contains legally privileged and/or confidential information. If you are not the intended recipient(s) of this message, you are hereby notified that any dissemination,
+				                                distribution or copying of this Report is strictly prohibited. If you have received this Report in error, please notify the sender immediately and delete this Report from your computer and all
+				                                your records.
+				                            </p>
+
+				                            <div class="row">
+				                                <div class="col-md-12">
+
+				                                    <p style="text-align: center; padding: 1rem; color: #8c9095;">
+				                                        © 2022 FinBII Powered By Capwise Financial Products Distribution Pvt Ltd. All Rights Reserved.
+				                                    </p>
+				                                </div>
+				                            </div>
+
+				                        </div>
+				                    </div>
+
+
+
+
+				                
+
+				               </div>
+				            </div>
+				        </section>
+
+
+
+
+
+                     <!-- JavaScript Bundle with Popper -->
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+				    </body>
+    			
+    			<!-- <div class ="page">
+    				<div class="oe_structure"/>
+    				<div class="row">
+    					<div class="col-xs-8">
+    						<table class="table table-condensed" style="border :3px solid black  !important;">
+    							<tr>
+    								<td width="40%">
+    									<p style="text-align:center;padding-top:10px">
+    										<t t-foreach="docs" t-as="doc">
+    											<t t-esc="doc.credit_score"/>
+    											<t t-esc="doc.first_name"/>
+    											<t t-esc="doc.Last_Name"/>
+                                                <t t-esc="doc.MobilePhone"/>
+    											<t t-esc="doc.SystemCode"/>
+    											<t t-esc="doc.MessageText"/>
+    											<t t-esc="doc.ReportDate"/>
+    											<t t-esc="doc.ReportTime"/>
+    											<t t-esc="doc.UserMessageText"/>
+    											<t t-esc="doc.Version"/>
+    											<t t-esc="doc.Enquiry_Username"/>
+    											<t t-esc="doc.ReportNumber"/>
+    											<t t-esc="doc.Subscriber_Name"/>
+    											<t t-esc="doc.Enquiry_Reason"/>
+    											<t t-esc="doc.Amount_Financed"/>
+    											<t t-esc="doc.Duration_Of_Agreement"/>
+    											<t t-esc="doc.Ration_Card_Number"/>
+    											<t t-esc="doc.Ration_Card_Issue_Date"/>
+    											<t t-esc="doc.Ration_Card_Expiration_Date"/>
+    											<t t-esc="doc.Universal_ID_Number"/>
+    											<t t-esc="doc.IncomeTaxPan"/>
+    											<t t-esc="doc.PAN_Issue_Date"/>
+    											<t t-esc="doc.Universal_ID_Issue_Date"/>
+    											<t t-esc="doc.Universal_ID_Expiration_Date"/>
+    											<t t-esc="doc.Date_Of_Birth_Applicant"/>
+    											<t t-esc="doc.Telephone_Number_Applicant_1st"/>
+    											<t t-esc="doc.Telephone_Extension"/>
+    											<t t-esc="doc.Telephone_Type"/>
+    											<t t-esc="doc.MobilePhone"/>
+    											<t t-esc="doc.EMailId"/>
+    											<t t-esc="doc.Income"/>
+    											<t t-esc="doc.Marital_Status"/>
+    											<t t-esc="doc.Employment_Status"/>
+    											<t t-esc="doc.Time_with_Employer"/>
+    											<t t-esc="doc.Number_of_Major_Credit_Card_Held"/>
+    											<t t-esc="doc.FlatNoPlotNoHouseNo"/>
+    											<t t-esc="doc.BldgNoSocietyName"/>
+    											<t t-esc="doc.RoadNoNameAreaLocality"/>
+    											<t t-esc="doc.City"/>
+    											<t t-esc="doc.Landmark"/>
+    											<t t-esc="doc.State"/>
+    											<t t-esc="doc.PINCode"/>
+    											<t t-esc="doc.Country_Code"/>
+    											<t t-esc="doc.Current_Application_Details"/>
+    											<t t-esc="doc.CADSuitFiledCurrentBalance"/>
+    											<t t-esc="doc.CreditAccountActive"/>
+    											<t t-esc="doc.CreditAccountClosed"/>
+    											<t t-esc="doc.CreditAccountDefault"/>
+    											<t t-esc="doc.CreditAccountTotal"/>
+    											<t t-esc="doc.Outstanding_Balance_Secured"/>
+    											<t t-esc="doc.Outstanding_Balance_Secured_Percentage"/>
+    											<t t-esc="doc.Outstanding_Balance_UnSecured"/>
+    											<t t-esc="doc.Outstanding_Balance_UnSecured_Percentage"/>
+    											<t t-esc="doc.Outstanding_Balance_All"/>
+    											<t t-esc="doc.Identification_Number"/>
+    											<t t-esc="doc.Subscriber_Name"/>
+    											<t t-esc="doc.Account_Number"/>
+    											<t t-esc="doc.Portfolio_Type"/>
+    											<t t-esc="doc.Account_Type"/>
+    											<t t-esc="doc.Open_Date"/>
+    											<t t-esc="doc.Credit_Limit_Amount"/>
+    											<t t-esc="doc.Terms_Duration"/>
+    											<t t-esc="doc.Terms_Frequency"/>
+    											<t t-esc="doc.Scheduled_Monthly_Payment_Amount"/>
+    											<t t-esc="doc.Account_Status"/>
+    											<t t-esc="doc.Payment_Rating"/>
+    											<t t-esc="doc.Payment_History_Profile"/>
+    											<t t-esc="doc.Special_Comment"/>
+    											<t t-esc="doc.Current_Balance"/>
+    											<t t-esc="doc.Amount_Past_Due"/>
+    											<t t-esc="doc.Original_Charge_Off_Amount"/>
+    											<t t-esc="doc.Date_Reported"/>
+    											<t t-esc="doc.Date_of_First_Delinquency"/>
+    											<t t-esc="doc.Date_Closed"/>
+    											<t t-esc="doc.Date_of_Last_Payment"/>
+    											<t t-esc="doc.SuitFiledWillfulDefaultWrittenOffStatus"/>
+    											<t t-esc="doc.SuitFiled_WilfulDefault"/>
+    											<t t-esc="doc.Written_off_Settled_Status"/>
+    											<t t-esc="doc.Value_of_Credits_Last_Month"/>
+    											<t t-esc="doc.Occupation_Code"/>
+    											<t t-esc="doc.Settlement_Amount"/>
+    											<t t-esc="doc.Value_of_Collateral"/>
+    											<t t-esc="doc.Type_of_Collateral"/>
+    											<t t-esc="doc.Written_Off_Amt_Total"/>
+    											<t t-esc="doc.Written_Off_Amt_Principal"/>
+    											<t t-esc="doc.Rate_of_Interest"/>
+    											<t t-esc="doc.Repayment_Tenure"/>
+    											<t t-esc="doc.Promotional_Rate_Flag"/>
+    											<t t-esc="doc.Income_Indicator"/>
+    											<t t-esc="doc.Income_Frequency_Indicator"/>
+    											<t t-esc="doc.DefaultStatusDate"/>
+    											<t t-esc="doc.LitigationStatusDate"/>
+    											<t t-esc="doc.WriteOffStatusDate"/>
+    											<t t-esc="doc.DateOfAddition"/>
+    											<t t-esc="doc.CurrencyCode"/>
+    											<t t-esc="doc.Subscriber_comments"/>
+    											<t t-esc="doc.Consumer_comments"/>
+    											<t t-esc="doc.AccountHoldertypeCode"/>
+    											<t t-esc="doc.Year"/>
+    											<t t-esc="doc.Month"/>
+    											<t t-esc="doc.Days_Past_Due"/>
+    											<t t-esc="doc.Surname_Non_Normalized"/>
+    											<t t-esc="doc.First_Name_Non_Normalized"/>
+    											<t t-esc="doc.Middle_Name_1_Non_Normalized"/>
+    											<t t-esc="doc.Middle_Name_2_Non_Normalized"/>
+    											<t t-esc="doc.Middle_Name_3_Non_Normalized"/>
+    											<t t-esc="doc.Alias"/>
+    											<t t-esc="doc.Income_TAX_PAN"/>
+    											<t t-esc="doc.Passport_number"/>
+    											<t t-esc="doc.Voter_ID_Number"/>
+    											<t t-esc="doc.Date_of_birth"/>
+    											<t t-esc="doc.First_Line_Of_Address_non_normalized"/>
+    											<t t-esc="doc.Second_Line_Of_Address_non_normalized"/>
+    											<t t-esc="doc.Third_Line_Of_Address_non_normalized"/>
+    											<t t-esc="doc.City_non_normalized"/>
+    											<t t-esc="doc.Fifth_Line_Of_Address_non_normalized"/>
+    											<t t-esc="doc.State_non_normalized"/>
+    											<t t-esc="doc.ZIP_Postal_Code_non_normalized"/>
+    											<t t-esc="doc.CountryCode_non_normalized"/>
+    											<t t-esc="doc.Address_indicator_non_normalized"/>
+    											<t t-esc="doc.Residence_code_non_normalized"/>
+    											<t t-esc="doc.Telephone_Number"/>
+    											<t t-esc="doc.Telephone_Type"/>
+    											<t t-esc="doc.Telephone_Extension"/>
+    											<t t-esc="doc.Mobile_Number"/>
+    											<t t-esc="doc.FaxNumber"/>
+    											<t t-esc="doc.Exact_match"/>
+    											<t t-esc="doc.TotalCAPSLast7Days"/>
+    											<t t-esc="doc.TotalCAPSLast30Days"/>
+    											<t t-esc="doc.TotalCAPSLast90Days"/>
+    											<t t-esc="doc.TotalCAPSLast180Days"/>
+    											<t t-esc="doc.CAPSLast7Days"/>
+    											<t t-esc="doc.CAPSLast30Days"/>
+    											<t t-esc="doc.CAPSLast90Days"/>
+    											<t t-esc="doc.CAPSLast180Days"/>
+    											<t t-esc="doc.NonCreditCAPSLast7Days"/>
+    											<t t-esc="doc.NonCreditCAPSLast30Days"/>
+    											<t t-esc="doc.NonCreditCAPSLast90Days"/>
+    											<t t-esc="doc.NonCreditCAPSLast180Days"/>
+    											<t t-esc="doc.BureauScore"/>
+    											<t t-esc="doc.CAIS_Account_History"/>
+    											<t t-esc="doc.CAIS_Holder_Phone_Details"/>
+    											<t t-esc="doc.BureauScoreConfidLevel"/>
+    											<t t-esc="doc.BureauPLcore"/>
+    											<t t-esc="doc.LeverageScore"/>
+    											<t t-esc="doc.NoHitScore"/>
+
+    										</t>
+    										<img t-if="not o.name"/>
+    									</p>
+    								</td>
+    							</tr>
+    						</table>
+    					</div>
+    				</div>
+    			</div> -->
+    		</t>
+    		</t>
+    	</t>
+    </template>
+
+</odoo>

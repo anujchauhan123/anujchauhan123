@@ -1,0 +1,121 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="calling_data_jjjjlist">
+      <field name="name">calling data list</field>
+      <field name="model">calling_data.calling_data</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="s_no"/>
+          <field name="company_name"/>
+          <field name="address_details"/>
+          <field name="city"/>
+          <field name="mobile" widget="phone"/>
+          <field name="loan_amount"/>
+          <field name="year"/>
+          <field name="Approved_loan"/>
+          <!-- <field name="e_mail"/> -->
+          <field name="lead_manager"/>
+          <field name="assigned_to"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record id="crm_stage_form_location_pin" model="ir.ui.view">
+        <field name="name">location.pin.form</field>
+        <field name="model">calling_data.calling_data</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Pin Code">
+              <header>
+                    <field name="status" widget="statusbar" options="{'clickable' : '1'}"/>
+                </header>
+                <sheet>
+                  <group>
+                    <group>
+                    <field name="s_no"/>
+                    <field name="company_name"/>
+                    <field name="address_details"/>
+                    <field name="city"/>
+                    <field name="loan_amount"/>
+          <field name="year"/>
+          <field name="Approved_loan"/>
+                  </group>
+                  <group>
+
+                    <field name="mobile" widget="phone"/>
+                    <field name="e_mail" widget="email"/>
+                    <field name="lead_manager"/>
+                    <field name="assigned_to"/>
+                    </group>
+                  </group>
+                </sheet>
+
+                <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="action_calling_data">
+      <field name="name">calling data</field>
+      <field name="res_model">calling_data.calling_data</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+
+    <record model="ir.actions.server" id="calling_data_action_server">
+      <field name="name">calling_data_server</field>
+      <field name="model_id" ref="model_calling_data_calling_data"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+
+
+<record id = "record_rule_for_data_calling" model = "ir.rule"> 
+   <field name = "name">Calling data For RM / Calling Center  </field> 
+   <field name = "model_id" ref = "model_calling_data_calling_data" /> 
+   <field name = "groups" eval = "[(4, ref ('capwise_crm.group_sale_call_centre'))]" /> 
+   <field name = "perm_read" eval = "True" /> 
+   <field name = "perm_write" eval = "True" /> 
+   <field name = "perm_create" eval = "False" /> 
+   <field name = "perm_unlink" eval = "False" /> 
+   <field name = "domain_force"> ['|', ('lead_manager', '=', user.id), ('assigned_to', '=', user.id)] </field> 
+</record>
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Calling Data" id="calling_data.menu_root" groups="capwise_crm.group_sale_call_centre"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Calling Data" id="calling_data_menu_1" parent="calling_data.menu_root" action="action_calling_data"/>
+
+
+    <!-- actions -->
+
+<!--     <menuitem name="List" id="calling_data.menu_1_list" parent="calling_data_menu_1" action="action_calling_data"
+              /> -->
+<!--     <menuitem name="Server to list" id="calling_jjjjjdata" parent="calling_data_menu_1"
+              action="calling_data_action_server"/> -->
+
+  </data>
+</odoo>

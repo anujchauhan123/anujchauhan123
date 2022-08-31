@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+        <t t-extend="KanbanView.buttons">
+            <t t-jquery="button" t-operation="after">
+                <t t-if="widget and widget.modelName and widget.modelName == 'capwise.lead'">
+                    <button
+                        class="btn btn-primary oe_button oe_highlight o_button_business_loan"
+                        type="button">Business Loan</button>
+                    <button
+                        class="btn btn-primary oe_button oe_highlight o_button_personal_loan"
+                        type="button">Personal Loan</button>
+                    <button
+                        class="btn btn-primary oe_button oe_highlight o_button_home_loan"
+                        type="button">Home Loan</button>
+                    <button
+                        class="btn btn-primary oe_button oe_highlight o_button_lap"
+                        type="button">Loan Against Property</button>    
+
+                        
+                </t>
+            </t>
+        </t>
+    </templates>

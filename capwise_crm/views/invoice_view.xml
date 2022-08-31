@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--         <record
+            id="action_crm_print_invoice"
+            string="Order Invoice"
+            model="crm.lead"
+            file="custom_crm.crm_print_invoice_pdf"
+            name="custom_crm.crm_print_invoice_pdf"
+            print_report_name="'Invoive - %s' % (object.customer_name)"
+            menu="False"
+        /> -->
+
+
+        <record id="action_crm_print_invoice" model="ir.actions.report">
+            <field name="name">Order Invoice</field>
+            <field name="model">crm.lead</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">capwise_crm.crm_print_invoice_pdf</field>
+            <field name="report_file">capwise_crm.crm_print_invoice_pdf</field>
+    
+            <field name="print_report_name">('Invoive - %s' % (object.partner_id.name))</field>
+            <field name="binding_model_id" ref="model_crm_lead"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

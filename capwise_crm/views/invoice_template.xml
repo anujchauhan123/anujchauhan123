@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="crm_invoice_report_order_document">
+    <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <div class="page">
+                <h4>
+                    <span t-field="o.partner_id.name"/>
+                </h4>
+                <strong>Email : </strong><span t-field="o.email_from"/><br/>
+                <t t-if="o.phone">
+                    <t t-set="phone" t-value="o.phone[-10:]"/>
+                    <strong>Phone : </strong><span t-esc="phone"/><br/>
+                </t>
+                <t t-elif="o.mobile">
+                    <t t-set="phone" t-value="o.mobile[-10:]"/>
+                    <strong>Phone : </strong><span t-esc="phone"/><br/>
+                </t>
+                <!-- <strong>Address : </strong><span t-field="o.partner_id.address"/><br/><br/> -->
+
+                <strong>Invoice Date : </strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                
+                <br></br>
+                <!-- <t t-set="invoice_number" t-value="o.generate_invoice_number()"/> -->
+                <!-- <strong>Invoice Number : </strong><t t-esc="invoice_number"/> -->
+                <br></br>
+                <!-- <strong>Mode of Payment : </strong><t t-if="o.payment_method1=='paytm'"> -->
+                                                        <span>Paytm</span>
+                                                    <!-- </t> -->
+                                                    <!-- <t t-elif="o.payment_method1=='gpay'"> -->
+                                                        <span>Google Pay</span>
+                                                    <!-- </t> -->
+                                                    <!-- <t t-elif="o.payment_method1=='website'"> -->
+                                                        <span>Website</span>
+                                                    <!-- </t> -->
+                                                    <!-- <t t-elif="o.payment_method1=='app'"> -->
+                                                        <span>App</span>
+                                                    <!-- </t> -->
+                <br></br>
+                <!-- <strong>Transaction ID : </strong><span t-field="o.transaction_id"/> -->
+                <br></br>
+                <!-- <t t-if="o.company_id.country_id.code == 'IN'">
+                
+                    <t t-set="tag_cgst_id" t-value="env.ref('l10n_in.cgst_tag_tax').id"/>
+                    <t t-set="tag_sgst_id" t-value="env.ref('l10n_in.sgst_tag_tax').id"/>
+                    <t t-set="tag_igst_id" t-value="env.ref('l10n_in.igst_tag_tax').id"/>
+                    <t t-set="tag_cess_id" t-value="env.ref('l10n_in.cess_tag_tax').id"/>
+                    <t t-set="tax_map" t-value="o.tax_line_ids.mapped('tax_id.tag_ids.id')"/>
+                    <t t-set="is_igst" t-value="tag_igst_id in tax_map"/>
+                    <t t-set="is_cgst" t-value="tag_cgst_id in tax_map"/>
+                    <t t-set="is_cess" t-value="tag_cess_id in tax_map"/>
+                    <t t-set="tax_datas" t-value="o._invoice_line_tax_values()"/>
+                </t> -->
+                <div>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <t t-set="colspan" t-value="8"/>
+                                <th t-name="o_description_id">
+                                    <strong>DESCRIPTION</strong>
+                                </th>
+                                <th t-name="o_validity_id">
+                                    <strong>VALIDITY</strong>
+                                </th>
+                                <th t-name="o_quantity_id">
+                                    <strong>QUANTITY</strong>
+                                </th>
+                                <th t-name="o_unit_price" style="display:flex;">
+                                    <strong>UNIT PRICE</strong>
+                                </th>
+                                <th t-name="o_subtotal">
+                                    <strong>SUBTOTAL</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td t-name="o_description_id">
+                                    <!-- <t t-if="o.course_type=='beginner'"> -->
+                                        Online Tution classes(All Subjects)
+                                    <!-- </t> -->
+                                    <!-- <t t-elif="o.course_type=='advance'"> -->
+                                        Online Tution classes(Certification)
+                                    <!-- </t> -->
+                                    <!-- <t t-elif="o.course_type=='pro'"> -->
+                                        Online Tution classes(Coding 1:5)
+                                    <!-- </t> -->
+                                    <!-- <t t-elif="o.course_type=='coding'"> -->
+                                        Online Tution classes(Coding 1:1)
+                                    <!-- </t> -->
+                                </td>
+<!--                                 <td t-name="o_validity_id">
+                                    <span t-field="o.validity"/>Month(s)
+                                </td>
+                                <td t-name="o_quantity_id">
+                                    <span t-field="o.no_of_students"/>
+                                </td> -->
+<!--                                 <td t-name="o_unit_price" style="display:flex;">
+                                    <t t-set="price" t-value="(o.price * 100)/(100- o.discount_percentage)"/>
+                                    <t t-set="unit_price" t-value="price/o.no_of_students"/>
+                                    &amp;#8377;<span t-esc="unit_price" t-options='{"widget": "float", "precision": 2}'/>
+                                </td> -->
+                                <!-- <td t-name="o_subtotal" style="display:flex;">
+                                    <t t-set="subtotal_price" t-value="unit_price * o.no_of_students"/>
+                                    &amp;#8377;<span t-esc="subtotal_price" t-options='{"widget": "float", "precision": 2}'/>
+                                </td> -->
+                            </tr>
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+
+<!--                     <div class="clearfix" name="so_total_summary">
+                        <div id="total" class="row" name="total">
+                            <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                                <table class="table table-sm">
+                                    <t t-set="discount_amount" t-value="subtotal_price - o.amount"/>
+                                    <tr class="border-black o_subtotal" style="">
+                                        <td name="td_discount_label"><strong>Discount</strong></td>
+                                        <td name="td_discount" class="text-right" >
+                                            <t t-set="discount" t-value="((discount_amount*100)/subtotal_price)"/>
+                                            <span><t t-esc="discount" t-options='{"widget": "float", "precision": 2}'/>%</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-black o_discount_amount" style="">
+                                        <td name="td_discount_amount_label"><strong>Total Discount</strong></td>
+                                        <td name="td_discount_amount">
+                                            &amp;#8377;<span t-esc="discount_amount" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-black o_payable_amount" style="">
+                                        <td name="td_payable_amount_label"><strong>Amount</strong></td>
+                                        <td name="td_payable_amount">
+                                            &amp;#8377;<span t-field="o.amount" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <br></br>
+                <div style="width: 100%; display:flex">
+                    <p>* While making the purchase you accept all Terms &amp; Conditions mentioned on our official website</p>
+                    <p>** The organisation follows no-refund policy</p>
+                </div>
+
+                <div style="width: 100%; display:flex">
+                    <p>Thank you for choosing us, hopefully we will strengthen our bond over time.</p>
+                    <p>Happy learning.</p>
+                </div>
+                <!-- <div style="width: 100%; display:flex">
+                    <div style="width: 50%; float:left;">
+                        <t t-if="o.signature">
+                            <span><strong>Customer Signature:</strong><img class="img img-fluid" style="width: 150px;" t-attf-src="/web/image/field.service/{{o.id}}/signature/90x90" t-att-alt="o.name"/></span>
+                        </t><br/><br/>
+                        <strong>Customer Name:</strong><span t-field="o.customer_id.name"/><br/><br/>
+                        <strong>Date:</strong><t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/><br/><br/>
+                    </div>
+                </div> -->
+            </div>
+        </t>
+    </t>
+</template>
+
+<template id="crm_print_invoice_pdf">
+    <t t-foreach="docs" t-as="o">
+        <t t-call="capwise_crm.crm_invoice_report_order_document" t-lang="o.partner_id.lang"/>
+    </t>
+</template>
+
+</odoo>

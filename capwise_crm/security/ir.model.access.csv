@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_loan_stage,loan.stage,model_loan_stage,,1,1,1,1
+access_capwise_loan_capwise_loan,capwise_loan.capwise_loan,model_capwise_loan_capwise_loan,base.group_user,1,1,1,1
+access_financial_institution,financial.institution,model_financial_institution,base.group_user,1,1,1,1
+access_operations_stage,operations.stage,model_operations_stage,base.group_user,1,1,1,1
+access_capwise_lead,capwise_lead,model_capwise_lead,sales_team.group_sale_salesman,1,0,0,0
+access_capwise_lead_manager,capwise_lead_mager,model_capwise_lead,sales_team.group_sale_manager,1,1,1,1
+access_financial_institution_onboard,financial.institution.onboard,model_financial_institution_onboard,base.group_user,1,1,1,1
+access_product_percentage,product.percentage,model_product_percentage,base.group_user,1,1,1,1
+access_location_pin,location.pin,model_location_pin,base.group_user,1,1,1,1
+access_daily_sale,daily.sale,model_daily_sale,base.group_user,1,1,1,1
+access_lender_details,lender.details,model_lender_details,base.group_user,1,1,1,1
+access_address_userlender,address.userlender,model_address_userlender,base.group_user,1,1,1,1
+access_credit_enquiries,credit.enquiries,model_credit_enquiries,base.group_user,1,1,1,1
+access_payment_history,payment.history,model_payment_history,base.group_user,1,1,1,1
+access_multiple_lender,multiple.lender,model_multiple_lender,base.group_user,1,1,1,1
